@@ -14,7 +14,7 @@ valgrind --leak-check=full ../push_swap -++-123 55 489
 echo " -- test miao --"
 valgrind --leak-check=full ../push_swap miao
 echo " -- test idosaodofoiaioif823789ayysiudyasyd89sayd8yd8a7y9dj21332232qjhkjhxkqu82yx37b2bx7tew678ftsgdyugiauhdsiu --"
-valgrind --leak-check=full ../push_swap idosaodofoiaioif823789ayysiudyasyd89sayd8yd8a7y9dj21332232qjhkjhxkqu82yx37b2bx7tew678ftsgdyugiauhdsiu | ../checker idosaodofoiaioif823789ayysiudyasyd89sayd8yd8a7y9dj21332232qjhkjhxkqu82yx37b2bx7tew678ftsgdyugiauhdsiu
+valgrind --leak-check=full ../push_swap idosaodofoiaioif823789ayysiudyasyd89sayd8yd8a7y9dj21332232qjhkjhxkqu82yx37b2bx7tew678ftsgdyugiauhdsiu
 echo " -- test 2147483648 -2147483648 0 --"
 valgrind --leak-check=full ../push_swap 2147483648 -2147483648 0
 
