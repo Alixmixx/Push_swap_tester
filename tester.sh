@@ -5,6 +5,7 @@ GREEN="\e[32m"
 YELLOW="\e[33m"
 MAGENTA="\e[35m"
 CYAN="\e[36m"
+LGREEN="\e[92m"
 ENDCOLOR="\e[0m"
 
 echo -e "		 TEST IS RUNNING..."
@@ -19,6 +20,8 @@ echo -e "		   ____       ____
 bash small.sh > small.log 2>&1
 bash big.sh > big.log 2>&1
 bash error.sh > error.log 2>&1
+bash checker.sh > checker.log 2>&1
+bash parsing.sh > parsing.log 2>&1
 
 echo -e "		    DONE !"
 echo -e "	================================"
@@ -86,10 +89,24 @@ else
 echo -e "	${RED}			$RES${ENDCOLOR}"
 fi
 echo -e "	================================"
+echo -e "	=========== ${LGREEN}PARSING${ENDCOLOR} ============"
+echo -e "	================================"
+echo -e "	Nombre de tests"
+TOT=$(cat ./parsing.sh | grep valgrind | wc -l)
+echo "				$TOT"
+echo -e "	Nombre de reponses"
+RES=$(cat parsing.log | grep 'OK\|Error' | wc -l)
+if [ $RES -eq $TOT ]
+then
+echo -e "	${GREEN}			$RES${ENDCOLOR}"
+else
+echo -e "	${RED}			$RES${ENDCOLOR}"
+fi
+echo -e "	================================"
 echo -e "	============ ${YELLOW}LEAKS${ENDCOLOR} ============="
 echo -e "	================================"
 echo -e "	Leaks ou erreurs"
-RES=$(echo -e $(cat error.log big.log small.log | grep "ERROR SUMMARY" | awk 'BEGIN{ORS="+"}; {print $4}' | sed 's/+$//') | bc)
+RES=$(echo -e $(cat error.log big.log small.log parsing.log checker.log | grep "ERROR SUMMARY" | awk 'BEGIN{ORS="+"}; {print $4}' | sed 's/+$//') | bc)
 if [ $RES -eq 0 ]
 then
 echo -e "	${GREEN}			$RES${ENDCOLOR}"
@@ -99,4 +116,4 @@ fi
 echo -e "	"
 echo -e "	================================"
 
-rm -rf small.log big.log error.log
+#rm -rf small.log big.log error.log parsing.log checker.log
